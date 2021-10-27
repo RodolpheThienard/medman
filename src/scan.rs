@@ -16,17 +16,16 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
     let mut music_files: Vec<MusicFile> = Vec::new();
     let walker = WalkDir::new(path).into_iter();
     for entry in walker {
-        let entry = entry.unwrap(); //TODO gérer l'erreur
-        if is_supported(&entry) {
-            match read_from_file(&entry.path()) {
-                Ok(tags) => 
-                    match tags.tag { 
-                        Some(values) => music_files.push(MusicFile::new(entry.path(), values)),
-                        None => println!("None"),
-                    }
-                Err(_) => println!("Err"),
-            }
-        }
+        match entry {
+            Ok(values) => if is_supported(&values) {
+                match read_from_file(&values.path()) {
+                    Ok(tags) => music_files.push(MusicFile::new(values.path(), tags.optional_info)),
+                    Err(_) => println!("Err"),
+                }
+            },
+            Err(err) => panic!("{:?}", err),
+        };
+        
     };
     music_files
 }
