@@ -10,5 +10,5 @@ structopt = "0.3.23"
 walkdir = "2.3.2"
 
 mp3-metadata = "0.3.3"
-json = "0.12.4"
+serde = "1.0.130"
 markdown-gen = "1.2.1"

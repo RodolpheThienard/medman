@@ -5,8 +5,14 @@ fn main() {
     let args = CliArguments::new();
     println!("{:?}", args);
     
-    let music_files = scan(args.path());
-    for music_file in music_files {
-        println!("{:?}", music_file);
+    if args.command() == "scan" {
+            let music_files = scan(args.path());
+
+            for music_file in music_files {
+                println!("{:#?}", music_file);
+            }
+    }
+    else {
+        panic!("Bad command");
     }
 }
