@@ -1,5 +1,7 @@
 use std::path::Path;
 use walkdir::{DirEntry, WalkDir};
+use mp3_metadata::*;
+
 
 use crate::musicfile::MusicFile;
 
@@ -16,7 +18,14 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
     for entry in walker {
         let entry = entry.unwrap(); //TODO gérer l'erreur
         if is_supported(&entry) {
-            music_files.push(MusicFile::new(entry.path()));
+            match read_from_file(&entry.path()) {
+                Ok(tags) => 
+                    match tags.tag { 
+                        Some(values) => music_files.push(MusicFile::new(entry.path(), values)),
+                        None => println!("None"),
+                    }
+                Err(_) => println!("Err"),
+            }
         }
     };
     music_files
