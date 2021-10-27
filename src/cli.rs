@@ -20,4 +20,8 @@ impl CliArguments {
     pub fn path(&self) -> &std::path::Path {
         self.path.as_path()
     }
+
+    pub fn command(&self) -> String {
+        self.command.clone()
+    }
 }
