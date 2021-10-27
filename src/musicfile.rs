@@ -1,18 +1,21 @@
 use std::path::{Path, PathBuf};
+use serde::{Serialize, Deserialize};
 
-use mp3_metadata::OptionalAudioTags;
-
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct MusicFile {
     path: PathBuf,
-    audio_tag: Vec<OptionalAudioTags>,
+    title: String,
+    year: i32,
+    artist: String,
 }
 
 impl MusicFile {
-    pub fn new(path: &Path, audio_info: Vec<OptionalAudioTags>) -> MusicFile {
+    pub fn new(path: &Path, title: String, year: i32, artist: String) -> MusicFile {
         MusicFile {
             path: path.to_path_buf(),
-            audio_tag: audio_info,
+            title,
+            year,
+            artist,
         }
     }
 }

@@ -9,6 +9,6 @@ edition = "2018"
 structopt = "0.3.23"
 walkdir = "2.3.2"
 
-mp3-metadata = "0.3.3"
-serde = "1.0.130"
 markdown-gen = "1.2.1"
+serde = { version = "1.0.130", features = ["derive"] }
+audiotags = "0.2.7182"
