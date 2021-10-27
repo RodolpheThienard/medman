@@ -18,4 +18,8 @@ impl MusicFile {
             artist,
         }
     }
+
+    pub fn serialize() {
+        
+    }
 }
