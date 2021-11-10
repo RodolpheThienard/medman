@@ -10,6 +10,12 @@ pub struct CliArguments {
     /// Chemin où trouver les fichiers à analyser
     #[structopt(parse(from_os_str))]
     path: std::path::PathBuf,
+
+    // https://stackoverflow.com/questions/60717253/structopt-how-to-combine-all-arguments-in-a-single-string
+    
+    
+    #[structopt(short = "s", long = "search", default_value = "None")]
+    search: String,
 }
 
 impl CliArguments {

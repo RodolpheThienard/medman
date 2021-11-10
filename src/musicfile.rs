@@ -7,19 +7,25 @@ pub struct MusicFile {
     title: String,
     year: i32,
     artist: String,
+    album: String,
 }
 
 impl MusicFile {
-    pub fn new(path: &Path, title: String, year: i32, artist: String) -> MusicFile {
+    pub fn new(path: &Path, title: String, year: i32, artist: String, album: String) -> MusicFile {
         MusicFile {
             path: path.to_path_buf(),
             title,
             year,
             artist,
+            album,
         }
     }
 
-    pub fn serialize() {
-        
+    pub fn album(&self) -> String {
+        self.album.clone()
+    }
+
+    pub fn title(&self) -> String {
+        self.title.clone()
     }
 }

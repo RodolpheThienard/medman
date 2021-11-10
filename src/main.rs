@@ -1,25 +1,33 @@
 use medman::cli::CliArguments;
 use medman::scan::scan;
-use markdown_gen::markdown::*;
+use medman::write2md::{write2md};
 use std::fs::File;
+use std::io::Write;
 
 fn main() {
     let args = CliArguments::new();
     println!("{:?}", args);
     
-    if args.command() == "scan" {
+    match args.command().as_str() {
+        "scan" => {
             let music_files = scan(args.path());
-
-            for music_file in music_files {
-                println!("{:#?}", music_file);
-                let val = serde_json::to_string(&music_file).unwrap();
-                println!("{:#?}",val);
-                let file = File::create("test.md").unwrap();
-                let mut md = Markdown::new(file);
-                md.write(val.as_str()).unwrap();
+            let serialized = serde_json::to_string_pretty(&music_files).unwrap();
+            let mut file = File::create("bar.json").unwrap();
+            file.write_all(serialized.as_bytes()).expect("Err")
+        },
+        "write2md" => { // add possibility to give text
+            match args.path().to_str() {
+                None => println!("Veulliez indiquer le texte à écrire dans le markdown"),
+                Some(_) => {
+                    let music_files = scan(args.path());
+                    write2md(music_files);
+                },
             }
-    }
-    else {
-        panic!("Bad command");
+        },
+        "search" => {
+            let music_files = scan(args.path());
+            
+        },
+        _ => panic!("Bad command"),
     }
 }

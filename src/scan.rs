@@ -23,7 +23,8 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
                     values.path(),
                 match value.title() {Some(e) => e.to_string(), None => "None".to_string()},
                     match value.year() { Some(e) => e, None => 0,},
-                    match value.artist() { Some(e) => e.to_string(), None => "None".to_string()}
+                    match value.artist() { Some(e) => e.to_string(), None => "None".to_string()},
+                    match value.album_title() { Some(e) => e.to_string(), None => "None".to_string()},
                 ));
             },
             Err(err) => panic!("{:?}", err),
