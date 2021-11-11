@@ -14,8 +14,8 @@ pub struct CliArguments {
     // https://stackoverflow.com/questions/60717253/structopt-how-to-combine-all-arguments-in-a-single-string
     
     
-    #[structopt(short = "s", long = "search", default_value = "None")]
-    search: String,
+    #[structopt(short = "s", long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
+    search: Option<Vec<String>>,
 }
 
 impl CliArguments {
@@ -33,5 +33,9 @@ impl CliArguments {
 
     pub fn command(&self) -> String {
         self.command.clone()
+    }
+
+    pub fn search(&self) -> Vec<String> {
+        self.search.clone().unwrap()
     }
 }

@@ -1,6 +1,7 @@
 use medman::cli::CliArguments;
 use medman::scan::scan;
 use medman::write2md::{write2md};
+use medman::search::{search};
 use std::fs::File;
 use std::io::Write;
 
@@ -26,7 +27,8 @@ fn main() {
         },
         "search" => {
             let music_files = scan(args.path());
-            
+            let result = search(music_files, args.search());
+            println!("{:#?}", result);
         },
         _ => panic!("Bad command"),
     }
