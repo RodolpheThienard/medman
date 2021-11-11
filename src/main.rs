@@ -20,7 +20,7 @@ fn main() {
                 None => println!("Veulliez indiquer le texte à écrire dans le markdown"),
                 Some(_) => {
                     let music_files = scan(args.path());
-                    write2md(music_files);
+                    write2md(music_files, args.path_str());
                 },
             }
         },

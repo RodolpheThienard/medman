@@ -25,7 +25,19 @@ impl MusicFile {
         self.album.clone()
     }
 
+    pub fn artist(&self) -> String {
+        self.artist.clone()
+    }
+
     pub fn title(&self) -> String {
         self.title.clone()
+    }
+
+    pub fn year(&self) -> String {
+        self.year.to_string().clone()
+    }
+
+    pub fn path(&self) -> &str {
+        self.path.to_str().unwrap().clone()
     }
 }

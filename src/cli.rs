@@ -27,6 +27,10 @@ impl CliArguments {
         self.path.as_path()
     }
 
+    pub fn path_str(&self) -> &str {
+        self.path.to_str().unwrap()
+    }
+
     pub fn command(&self) -> String {
         self.command.clone()
     }
