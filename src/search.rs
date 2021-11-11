@@ -21,8 +21,6 @@ impl Pile {
 
 pub fn search(music_files: Vec<MusicFile>, request: Vec<String>) -> Vec<MusicFile> {
     let mut searched: Vec<MusicFile> = Vec::new();
-    let len = music_files.len() as usize;
-    let mut tmp : Vec<i32> = vec![0;len];
     let mut pile = Pile::new();
     for req in &request {
         match req.as_str() {
@@ -33,13 +31,13 @@ pub fn search(music_files: Vec<MusicFile>, request: Vec<String>) -> Vec<MusicFil
         }
         
     }
-    println!("{:#?}", depile(pile));
+    let tmp = depile(pile);
 
-    // for i in 0..music_files.len() {
-    //     if tmp[i] == 1 {
-    //         searched.push(music_files[i].clone());
-    //     }
-    // }
+    for i in 0..music_files.len() {
+        if tmp[i] == 1 {
+            searched.push(music_files[i].clone());
+        }
+    }
     println!("number of restriction : {}",request.len());
     searched
 }
