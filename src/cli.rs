@@ -12,11 +12,21 @@ pub struct CliArguments {
     path: std::path::PathBuf,
 
     // https://stackoverflow.com/questions/60717253/structopt-how-to-combine-all-arguments-in-a-single-string
-    
-    
+    #[structopt(short = "f", long = "file")]
+    deserialize: Option<String>, // use json
+
+    #[structopt(long = "save")]
+    serialize: Option<String>, // Json 
+
+    #[structopt(short = "d", long = "display")]
+    diplay: Option<String>, // console / Markdown 
+
+    #[structopt(short = "pl", long = "playlist")]
+    playlist: Option<String>,
+
     #[structopt(short = "s", long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
     search: Option<Vec<String>>,
-}
+} 
 
 impl CliArguments {
     pub fn new() -> CliArguments {
