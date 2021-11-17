@@ -38,7 +38,6 @@ pub fn search(music_files: Vec<MusicFile>, request: Vec<String>) -> Vec<MusicFil
             searched.push(music_files[i].clone());
         }
     }
-    println!("number of restriction : {}",request.len());
     searched
 }
 
@@ -88,32 +87,28 @@ fn depile(mut pile: Pile) -> Vec<i32> {
     let mut operator: Option<Operator> = None;
     let mut two: Vec<i32> = Vec::new();
     while pile.op.len() !=0 || pile.value.len() !=0 {
-        println!("ici");
         if pile.op.len() !=0 {operator = pile.op.pop();}
         if pile.value.len() !=0 {two = pile.value.pop().unwrap();}
         match operator {
             Some(Operator::Not) => {
-                println!("Not");
                 for i in 0..one.len() {
                     if one[i] == 0 {one[i] = 1}
                     else { one[i] = 0}
                 };
             },
             Some(Operator::And) => {
-                println!("And");
                 for i in 0..one.len() {
                     if one[i] == 1 && two[i] == 1 {one[i] = 1}
                     else {one[i] = 0};
                 }
             },
             Some(Operator::Or) => {
-                println!("Or");
                 for i in 0..one.len() {
                     if one[i] == 0 && two[i] == 0 {one[i] = 0}
                     else {one[i] = 1};
                 }
             },
-            None => panic!("aie"),
+            None => panic!("Err from depile function"),
         };
         
 

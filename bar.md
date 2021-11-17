@@ -1,4 +1,3 @@
-# All music in music
 ## N° : 0, path :  music/02\. Technimatic, Jinadu \- Better Perspective\.mp3
 Artist : Technimatic/Jinadu
 

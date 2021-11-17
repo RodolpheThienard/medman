@@ -4,13 +4,11 @@ use std::{fs::File};
 use crate::musicfile::{MusicFile};
 
 
-pub fn write2md(musicfiles : Vec<MusicFile>, path: &str) {
+pub fn write2md(musicfiles : Vec<MusicFile>, file_name: String) {
 
-    let title_path = format!("{}{}", "All music in ", path);
     let mut i = 0;
-    let file = File::create("bar.md").unwrap();
+    let file = File::create(format!("{}.md",file_name)).unwrap();
     let mut md = Markdown::new(file);
-    md.write(title_path.heading(1)).unwrap();
     for music in musicfiles {
         
         md.write(format!("N° : {}, path :  {}", i.to_string(), music.path()).heading(2)).unwrap();

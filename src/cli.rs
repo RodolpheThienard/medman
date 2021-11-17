@@ -5,10 +5,11 @@ use structopt::StructOpt;
 #[derive(StructOpt)]
 pub struct CliArguments {
     /// Commande à exécuter
+    #[structopt(default_value="")]
     command: String,
 
     /// Chemin où trouver les fichiers à analyser
-    #[structopt(parse(from_os_str))]
+    #[structopt(parse(from_os_str),default_value="")]
     path: std::path::PathBuf,
 
     // https://stackoverflow.com/questions/60717253/structopt-how-to-combine-all-arguments-in-a-single-string
@@ -31,6 +32,14 @@ pub struct CliArguments {
 impl CliArguments {
     pub fn new() -> CliArguments {
         CliArguments::from_args()
+    }
+    
+    pub fn save(&self) ->  Option<String> {
+        self.serialize.clone()
+    }
+
+    pub fn file(&self) ->  Option<String> {
+        self.deserialize.clone()
     }
 
     pub fn path(&self) -> &std::path::Path {

@@ -4,7 +4,7 @@ use audiotags::*;
 
 use crate::musicfile::MusicFile;
 
-const SUPPORTED_EXTENSIONS: [&str; 1] = ["mp3"];
+const SUPPORTED_EXTENSIONS: [&str; 8] = ["mp3", "mp4", "Flac", "m4a", "m4p", "m4b", "m4r", "m4v"];
 
 fn is_supported(entry: &DirEntry) -> bool {
     entry.path().is_file() &&
