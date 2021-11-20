@@ -11,7 +11,6 @@ use std::io::{Write};
 
 fn main() {
     let args = CliArguments::new();
-    println!("{:?}", args);
     
     match args.command().as_str() {
         "scan" => {
@@ -87,3 +86,34 @@ fn main() {
         _ => user_helper(),
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    #[test]
+    fn scan_file() {
+        //MusicFile list of music in folder.
+        let mut music_files: Vec<MusicFile> = Vec::new();
+        music_files.push(MusicFile::new(
+            std::path::Path::new("folder/lomepal - trop beau.mp3"),
+            " trop beau".to_string(),
+            2019,
+            "lomepal ".to_string(),
+            "3 jours à Motorbass".to_string()
+        ));
+        music_files.push(MusicFile::new(
+            std::path::Path::new("folder/Therapie TAXI - Ete 90.mp3"),
+            " Ete 90".to_string(),
+            2021,
+            "Therapie TAXI ".to_string(),
+            "Rupture 2 merde".to_string()
+        ));
+
+        //scan function.
+        let music = scan(std::path::Path::new("folder"));
+        
+        // convert into string to compare it
+        assert_eq!(serde_json::to_string_pretty(&music_files).unwrap(), serde_json::to_string_pretty(&music).unwrap());
+    }
+}
+
