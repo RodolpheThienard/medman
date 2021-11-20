@@ -181,6 +181,7 @@ version = "0.1.0"
 dependencies = [
  "audiotags",
  "markdown-gen",
+ "pls",
  "serde",
  "serde_json",
  "structopt",
@@ -225,6 +226,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "64ae83441f6b67e3b7f009295618e90f03228b0f1a149f56ee8cd0f6bb5602c5"
 
 [[package]]
+name = "pls"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fa4b7fc7e288a7e43658f494dda9b9ee01cbcfc4a99931e90191cccbc5f2b45"
+dependencies = [
+ "rust-ini",
+]
+
+[[package]]
 name = "proc-macro-error"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -265,6 +275,12 @@ checksum = "38bc8cc6a5f2e3655e0899c1b848643b2562f853f114bfec7be120678e3ace05"
 dependencies = [
  "proc-macro2",
 ]
+
+[[package]]
+name = "rust-ini"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a654c5bda722c699be6b0fe4c0d90de218928da5b724c3e467fc48865c37263"
 
 [[package]]
 name = "ryu"

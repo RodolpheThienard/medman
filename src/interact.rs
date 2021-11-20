@@ -5,11 +5,11 @@ pub fn user_helper() {
     println!("Print all commands avaible");
 
     let mut buf = String::new();
-    let mut bool = String::new();
+    let mut toogler = String::new();
 
    
     loop {
-        stdin().read_line(&mut buf);
+        let _ = stdin().read_line(&mut buf);
         match buf.as_str() {
             "scan\n" => {
                 println!("");
@@ -20,14 +20,15 @@ pub fn user_helper() {
                 let music_files = scan(&path);
 
                 println!("Souhaitez vous l'enregistrer en json ? ( y / n) ");
-                stdin().read_line(&mut bool);
-                match bool.as_str() {
+                let _ = stdin().read_line(&mut toogler);
+                match toogler.as_str() {
                     "n\n" => {},
                     "y\n" => {
                         let serialized = serde_json::to_string_pretty(&music_files).unwrap();
                         let mut file = std::fs::File::create("interaction.json").unwrap();
                         file.write_all(serialized.as_bytes()).expect("Err");
                     },
+                    _ => {},
                 }
 
                 break;},

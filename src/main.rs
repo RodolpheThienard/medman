@@ -5,6 +5,7 @@ use medman::write2md::{write2md};
 use medman::search::{search};
 use medman::tag::{set_tag};
 use medman::interact::user_helper;
+use medman::write2playlist::write2pls;
 use std::fs::File;
 use std::io::{Write};
 
@@ -61,6 +62,10 @@ fn main() {
         "tag" => {
             let music_files = scan(args.path());
             set_tag(music_files);
+        },
+        "write2playlist" => {
+            let music_files = scan(args.path());
+            write2pls(music_files);
         },
         _ => user_helper(),
     }
