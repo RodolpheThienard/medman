@@ -73,7 +73,16 @@ fn main() {
             }           
         },
         "scrap" => {
-            let result = scrap();
+            match args.deseria() {
+                false => {
+                    let music_files = scan(args.path());
+                    let result = scrap(music_files);
+                },
+                true => {
+                    let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
+                    let result = scrap(deserialize);
+                },
+            }
         },
         _ => user_helper(),
     }

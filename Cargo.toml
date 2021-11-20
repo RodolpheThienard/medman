@@ -19,4 +19,4 @@ audiotags = "0.2.7182"
 pls = "0.2.2"
 
 reqwest = "0.9.18"
-uuid = "0.8.1"
+urlencoding = "1.1.1"
