@@ -62,8 +62,16 @@ fn main() {
             scan_add_tag(args.path(), &args.category(), &args.tag());
         },
         "write2playlist" => {
-            let music_files = scan(args.path());
-            write2pls(music_files);
+            match args.deseria() {
+                false => {
+                    let music_files = scan(args.path());
+                    write2pls(music_files);
+                },
+                true => {
+                    let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
+                    write2pls(deserialize);
+                },
+            }           
         },
         _ => user_helper(),
     }
