@@ -33,3 +33,34 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
     };
     music_files
 }
+
+pub fn scan_add_tag(path: &Path, cat: &str, tag: &str) {
+    let walker = WalkDir::new(path).into_iter();
+    
+    for entry in walker {
+        match entry {
+            Ok(values) => if is_supported(&values) {
+                let mut value = Tag::default().read_from_path(&values.path()).unwrap();
+                match cat {
+                    "title" => {
+                        value.set_title(tag);
+                    },
+                    "year" => {
+                        println!("OUI");
+                        value.set_year(std::str::FromStr::from_str(tag).unwrap());
+                    },
+                    "artist" => {
+                        value.set_artist(tag);
+                    },
+                    "album" => {
+                        value.set_album_title(tag);
+                    },
+                    _ => {println!("Bad category requested. Only Title and Year can be changed.")},
+                }
+                value.write_to_path(&values.path().to_str().unwrap()).unwrap();
+            },
+            Err(err) => panic!("{:?}", err),
+        };
+        
+    };
+}

@@ -1,9 +1,9 @@
 use medman::cli::CliArguments;
 use medman::musicfile::MusicFile;
-use medman::scan::scan;
+use medman::scan::{scan, scan_add_tag};
 use medman::write2md::{write2md};
 use medman::search::{search};
-use medman::tag::{set_tag};
+use medman::tag::{};
 use medman::interact::user_helper;
 use medman::write2playlist::write2pls;
 use std::fs::File;
@@ -60,8 +60,7 @@ fn main() {
             
         },
         "tag" => {
-            let music_files = scan(args.path());
-            set_tag(music_files);
+            scan_add_tag(args.path(), &args.cat(), &args.tag());
         },
         "write2playlist" => {
             let music_files = scan(args.path());

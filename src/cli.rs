@@ -25,6 +25,11 @@ pub struct CliArguments {
     #[structopt(short = "pl", long = "playlist")]
     playlist: Option<String>,
 
+    #[structopt(long = "cat")]
+    cat: Option<String>,
+    #[structopt(long = "tag")]
+    tag: Option<String>,
+
     #[structopt(short = "s", long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
     search: Option<Vec<String>>,
 } 
@@ -57,4 +62,13 @@ impl CliArguments {
     pub fn search(&self) -> Vec<String> {
         self.search.clone().unwrap()
     }
+
+    pub fn tag(&self) -> String {
+        self.tag.clone().unwrap()
+    }
+
+    pub fn cat(&self) -> String {
+        self.cat.clone().unwrap()
+    }
+
 }
