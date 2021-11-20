@@ -19,10 +19,10 @@ impl Pile {
     }
 }
 
-pub fn search(music_files: Vec<MusicFile>, request: Vec<String>) -> Vec<MusicFile> {
+pub fn search(music_files: Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicFile> {
     let mut searched: Vec<MusicFile> = Vec::new();
     let mut pile = Pile::new();
-    for req in &request {
+    for req in request {
         match req.as_str() {
             "not" => {pile.op.push(Operator::Not)},
             "and" => {pile.op.push(Operator::And)},
@@ -47,7 +47,6 @@ fn music_filter(music_files: &Vec<MusicFile>, req: &String) -> Vec<i32> {
     let split = req.split("=");
     let value_category = split.clone().collect::<Vec<&str>>()[0];
     let value = split.clone().collect::<Vec<&str>>()[1];
-    println!("{} : {}",value_category, value);
     for music in music_files {
         match value_category {
             "title" => {

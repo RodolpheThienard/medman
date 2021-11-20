@@ -5,6 +5,7 @@ use medman::write2md::{write2md};
 use medman::search::{search};
 use medman::interact::user_helper;
 use medman::write2playlist::write2pls;
+use medman::scrap::{scrap};
 use std::fs::File;
 use std::io::{Write};
 
@@ -47,13 +48,11 @@ fn main() {
             match args.deseria() {
                 false => {
                     let music_files = scan(args.path());
-                    let result = search(music_files, args.search());
-                    println!("{:#?}", result);
+                    search(music_files, &args.search());
                 },
                 true => {
                     let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
-                    let result = search(deserialize, args.search());
-                    println!("{:#?}", result);
+                    search(deserialize, &args.search());
                 },
             }
             
@@ -72,6 +71,9 @@ fn main() {
                     write2pls(deserialize);
                 },
             }           
+        },
+        "scrap" => {
+            scrap();
         },
         _ => user_helper(),
     }
