@@ -73,7 +73,7 @@ fn main() {
             }           
         },
         "scrap" => {
-            scrap();
+            let result = scrap();
         },
         _ => user_helper(),
     }
