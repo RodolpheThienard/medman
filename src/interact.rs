@@ -3,9 +3,21 @@ use crate::scan::scan;
 
 pub fn user_helper() {
     println!("Print all commands avaible");
+    println!("Scan : permet de scan un dossier pour y enregistrer 
+    toutes les musiques et par la suite, modifier les informations");
+    println!("write2md : permet de convertir un scan ou un fichier 
+    sérialisé en fichier markdown");
+    println!("search : permet de trier un scan ou un fichier sérialisé
+    avec différents argument ( year / title / artist / album ) et differents
+    modificateur ( not / and / or)");
+    println!("write2playlist : permet de convertir un scan ou un 
+    fichier serialisé en un playlist en .pls");
+    println!("tag : permet d'ajouter / modifier une metadata ( tags ) qui sont
+    album / year / title / artist");
 
     let mut buf = String::new();
     let mut toogler = String::new();
+    let mut path = String::new();
 
    
     loop {
@@ -15,8 +27,8 @@ pub fn user_helper() {
                 println!("");
 
                 println!("où souhaitez vous scanner les musiques ?");
-                stdin().read_line(&mut buf).expect("Path non reconnu");
-                let path = std::path::Path::new(&buf);
+                stdin().read_line(&mut path).expect("Path non reconnu");
+                let path = std::path::Path::new(&path[0..path.len()-1]);
                 let music_files = scan(&path);
 
                 println!("Souhaitez vous l'enregistrer en json ? ( y / n) ");
@@ -30,9 +42,10 @@ pub fn user_helper() {
                     },
                     _ => {},
                 }
-
                 break;},
-            "write2md\n" => {break;},
+
+            "write2md\n" => {
+                break;},
             "search\n" => {break;},
             _ => {},
         }
