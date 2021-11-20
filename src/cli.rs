@@ -13,10 +13,10 @@ pub struct CliArguments {
     path: std::path::PathBuf,
 
     #[structopt(long = "deserialize", help("to use a serialise json file"))]
-    deserialize: Option<String>, // use json
+    deserialize: bool, // use json
 
     #[structopt(long = "serialize", help("to serialise a scan into a json file"))]
-    serialize: Option<String>, // Json 
+    serialize: bool, // Json 
 
     #[structopt(short = "cat", long = "category", required_if("command", "playlist"), help("Category option is used to give the category you would like to change.\nLike tag option, use it only with the command : playlist"))]
     category: Option<String>,
@@ -33,11 +33,11 @@ impl CliArguments {
         CliArguments::from_args()
     }
     
-    pub fn save(&self) ->  Option<String> {
+    pub fn seria(&self) ->  bool {
         self.serialize.clone()  
     }
 
-    pub fn file(&self) ->  Option<String> {
+    pub fn deseria(&self) ->  bool {
         self.deserialize.clone()
     }
 

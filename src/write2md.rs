@@ -4,10 +4,10 @@ use std::{fs::File};
 use crate::musicfile::{MusicFile};
 
 
-pub fn write2md(musicfiles : Vec<MusicFile>, file_name: String) {
+pub fn write2md(musicfiles : Vec<MusicFile>) {
 
     let mut i = 0;
-    let file = File::create(format!("{}.md",file_name)).unwrap();
+    let file = File::create("seriafile.md").unwrap();
     let mut md = Markdown::new(file);
     for music in musicfiles {
         
