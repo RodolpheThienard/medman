@@ -15,22 +15,22 @@ pub struct CliArguments {
     #[structopt(long = "deserialize", help("to use a serialise json file"))]
     deserialize: bool, // use json
 
-    #[structopt(short = "md", long="markdown", help("to export in markdown file"))]
+    #[structopt(long="markdown", help("to export in markdown file"))]
     markdown: bool,
 
-    #[structopt(short = "pls", long="playlist", help("to export in pls file"))]
+    #[structopt( long="playlist", help("to export in pls file"))]
     playlist: bool,
 
     #[structopt(long = "serialize", help("to serialise a scan into a json file"))]
     serialize: bool, // Json 
 
-    #[structopt(short = "cat", long = "category", required_if("command", "playlist"), help("Category option is used to give the category you would like to change.\nLike tag option, use it only with the command : playlist"))]
+    #[structopt(long = "category", required_if("command", "playlist"), help("Category option is used to give the category you would like to change.\nLike tag option, use it only with the command : playlist"))]
     category: Option<String>,
 
-    #[structopt(short = "tag", long = "tag", required_if("command", "playlist"), help("Tag option is used if you want to change a files' tag \nYou have to use it with --category\nExample: --tag value "))]
+    #[structopt(long = "tag", required_if("command", "playlist"), help("Tag option is used if you want to change a files' tag \nYou have to use it with --category\nExample: --tag value "))]
     tag: Option<String>,
 
-    #[structopt(short = "src", long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
+    #[structopt(long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
     search: Option<Vec<String>>,
 
 
