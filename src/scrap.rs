@@ -26,8 +26,6 @@ pub fn scrap(music_files: &Vec<MusicFile>) -> Result<(), Error> {
         
         let album = &data["recordings"][0]["releases"][0]["title"];
         let year = &data["recordings"][0]["releases"][0]["release-events"][0]["date"];
-        
-        println!("album = {} | date = {}", album, year);
 
         let mut value = Tag::default().read_from_path(&music.path()).unwrap();
         value.set_title(title);
