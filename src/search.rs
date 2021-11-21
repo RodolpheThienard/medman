@@ -19,7 +19,7 @@ impl Pile {
     }
 }
 
-pub fn search(music_files: Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicFile> {
+pub fn search(music_files: &Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicFile> {
     let mut searched: Vec<MusicFile> = Vec::new();
     let mut pile = Pile::new();
     for req in request {

@@ -5,6 +5,14 @@ use crate::musicfile::MusicFile;
 use crate::search::search;
 
 pub fn user_helper() {
+    let mut buf = String::new();
+    let mut toogler = String::new();
+    let mut toogler2 = String::new();
+    let mut path = String::new();
+    let mut category = String::new();
+    let mut arguments = String::new();
+
+
     println!("Print all commands avaible");
     println!("Scan : permet de scan un dossier pour y enregistrer 
     toutes les musiques et par la suite, modifier les informations");
@@ -17,14 +25,6 @@ pub fn user_helper() {
     fichier serialisé en un playlist en .pls");
     println!("tag : permet d'ajouter / modifier une metadata ( tags ) qui sont
     album / year / title / artist");
-
-    let mut buf = String::new();
-    let mut toogler = String::new();
-    let mut toogler2 = String::new();
-    let mut path = String::new();
-    let mut category = String::new();
-    let mut arguments = String::new();
-
    
     'interact: loop {
         let _ = stdin().read_line(&mut buf);
@@ -58,11 +58,11 @@ pub fn user_helper() {
                             stdin().read_line(&mut path).expect("Path non reconnu");
                             let path = std::path::Path::new(&path[0..path.len()-1]);
                             let music_files = scan(&path);
-                            write2md(music_files);
+                            write2md(&music_files);
                         },
                         "y\n" => {
                             let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
-                            write2md(deserialize);
+                            write2md(&deserialize);
                         },
                         _ => {},
                     }
@@ -101,12 +101,12 @@ pub fn user_helper() {
                                     stdin().read_line(&mut path).expect("Path non reconnu");
                                     let path = std::path::Path::new(&path[0..path.len()-1]);
                                     let music_files = scan(&path);
-                                    search(music_files, &args_vec);
+                                    search(&music_files, &args_vec);
                                     break 'search;
                                 },
                                 "y\n" => {
                                     let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
-                                    search(deserialize, &args_vec);
+                                    search(&deserialize, &args_vec);
                                     break 'search;
                                 },
                                 _ => {break;},

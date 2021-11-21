@@ -4,7 +4,7 @@ use std::{fs::File};
 use crate::musicfile::{MusicFile};
 
 
-pub fn write2md(musicfiles : Vec<MusicFile>) {
+pub fn write2md(musicfiles : &Vec<MusicFile>) {
 
     let mut i = 0;
     let file = File::create("seriafile.md").unwrap();

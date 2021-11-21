@@ -3,7 +3,7 @@ use crate::musicfile::MusicFile;
 use std::fs::File;
 use std::io::Write;
 
-pub fn write2pls(music_files: Vec<MusicFile>) {
+pub fn write2pls(music_files: &Vec<MusicFile>) {
 
     let buf = Vec::new();
     let mut playlist: Vec<PlaylistElement> = Vec::new();

@@ -4,7 +4,7 @@ use crate::musicfile::MusicFile;
 use urlencoding::encode;
 use audiotags::Tag;
 
-pub fn scrap(music_files: Vec<MusicFile>) -> Result<(), Error> {
+pub fn scrap(music_files: &Vec<MusicFile>) -> Result<(), Error> {
 
     for music in music_files {
         let split = music.path().split('/').collect::<Vec<&str>>();

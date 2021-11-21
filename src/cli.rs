@@ -15,6 +15,12 @@ pub struct CliArguments {
     #[structopt(long = "deserialize", help("to use a serialise json file"))]
     deserialize: bool, // use json
 
+    #[structopt(short = "md", long="markdown", help("to export in markdown file"))]
+    markdown: bool,
+
+    #[structopt(short = "pls", long="playlist", help("to export in pls file"))]
+    playlist: bool,
+
     #[structopt(long = "serialize", help("to serialise a scan into a json file"))]
     serialize: bool, // Json 
 
@@ -26,6 +32,8 @@ pub struct CliArguments {
 
     #[structopt(short = "src", long = "search", required_if("command", "search"), help("exemple search : artist=name, \nyou can use operator \" and / or / not \" to filter \nexample : artist=name and year=2001, \n/!\\ To put a compose name ( with space ) add : \\: name=composed\\ name"))]
     search: Option<Vec<String>>,
+
+
 } 
 
 impl CliArguments {
@@ -39,6 +47,14 @@ impl CliArguments {
 
     pub fn deseria(&self) ->  bool {
         self.deserialize.clone()
+    }
+
+    pub fn playlist(&self) ->  bool {
+        self.playlist.clone()
+    }
+
+    pub fn markdown(&self) ->  bool {
+        self.markdown.clone()
     }
 
     pub fn path(&self) -> &std::path::Path {
