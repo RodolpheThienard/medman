@@ -39,7 +39,7 @@ impl Pile {
 /// let music_files = search(&scaned_files, &request);
 /// ```
 
-pub fn search(music_files: &Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicFile> {
+pub fn search(music_files: &[MusicFile], request: &[String]) -> Vec<MusicFile> {
     let mut searched: Vec<MusicFile> = Vec::new();
     let mut pile = Pile::new();
     for req in request {
@@ -47,7 +47,7 @@ pub fn search(music_files: &Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicF
             "not" => {pile.op.push(Operator::Not)},
             "and" => {pile.op.push(Operator::And)},
             "or" => {pile.op.push(Operator::Or)},
-            _ => {pile.value.push(music_filter(&music_files, req))},
+            _ => {pile.value.push(music_filter(music_files, req))},
         }
         
     }
@@ -61,13 +61,12 @@ pub fn search(music_files: &Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicF
     searched
 }
 
-fn music_filter(music_files: &Vec<MusicFile>, req: &String) -> Vec<i32> {
+fn music_filter(music_files: &[MusicFile], req: &str) -> Vec<i32> {
     let mut tmp : Vec<i32> = vec![0;music_files.len() as usize];
-    let mut index = 0;
-    let split = req.split("=");
+    let split = req.split('=');
     let value_category = split.clone().collect::<Vec<&str>>()[0];
     let value = split.clone().collect::<Vec<&str>>()[1];
-    for music in music_files {
+    for (index, music) in music_files.iter().enumerate() {
         match value_category {
             "title" => {
                 if music.title() == value {
@@ -94,9 +93,8 @@ fn music_filter(music_files: &Vec<MusicFile>, req: &String) -> Vec<i32> {
                     tmp[index] = 1;
                 }
             },
-            _ => {"";},
+            _ => {},
         };
-        index += 1;
     };
     tmp
 }
@@ -105,9 +103,9 @@ fn depile(mut pile: Pile) -> Vec<i32> {
     let mut one = pile.value.pop().unwrap();
     let mut operator: Option<Operator> = None;
     let mut two: Vec<i32> = Vec::new();
-    while pile.op.len() !=0 || pile.value.len() !=0 {
-        if pile.op.len() !=0 {operator = pile.op.pop();}
-        if pile.value.len() !=0 {two = pile.value.pop().unwrap();}
+    while !pile.op.is_empty() || !pile.value.is_empty() {
+        if !pile.op.is_empty() {operator = pile.op.pop();}
+        if !pile.value.is_empty() {two = pile.value.pop().unwrap();}
         match operator {
             Some(Operator::Not) => {
                 for i in 0..one.len() {

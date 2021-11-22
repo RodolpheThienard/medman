@@ -9,7 +9,7 @@ use medman::scrap::{scrap};
 use std::fs::File;
 use std::io::{Write};
 
-fn check_md_pls(args: CliArguments, music_files: &Vec<MusicFile>) {
+fn check_md_pls(args: CliArguments, music_files: &[MusicFile]) {
     match (args.markdown(), args.playlist()) {
         (false, false) => {},
         (false, true) => {

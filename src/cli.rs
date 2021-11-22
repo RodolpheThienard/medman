@@ -42,19 +42,19 @@ impl CliArguments {
     }
     
     pub fn seria(&self) ->  bool {
-        self.serialize.clone()  
+        self.serialize 
     }
 
     pub fn deseria(&self) ->  bool {
-        self.deserialize.clone()
+        self.deserialize
     }
 
     pub fn playlist(&self) ->  bool {
-        self.playlist.clone()
+        self.playlist
     }
 
     pub fn markdown(&self) ->  bool {
-        self.markdown.clone()
+        self.markdown
     }
 
     pub fn path(&self) -> &std::path::Path {

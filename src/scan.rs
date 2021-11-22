@@ -77,7 +77,7 @@ pub fn scan_add_tag(path: &Path, cat: &str, tag: &str) {
                     },
                     _ => {println!("Bad category requested. Only Title and Year can be changed.")},
                 }
-                value.write_to_path(&values.path().to_str().unwrap()).unwrap();
+                value.write_to_path(values.path().to_str().unwrap()).unwrap();
             },
             Err(err) => panic!("{:?}", err),
         };

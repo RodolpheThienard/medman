@@ -10,12 +10,12 @@ use std::io::Write;
 /// Le fichier de sorti portera le nom : playlist.pls
 /// # Examples : 
 /// ```
-/// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// let music_files: VecMusicFile> = scan(std::path::Path::new("location"));
 /// 
 /// write2pls(&music_files);
 /// ```
 
-pub fn write2pls(music_files: &Vec<MusicFile>) {
+pub fn write2pls(music_files: &[MusicFile]) {
 
     let mut buf = Vec::new();
     let mut playlist: Vec<PlaylistElement> = Vec::new();

@@ -15,12 +15,11 @@ use crate::musicfile::{MusicFile};
 /// write2md(&music_files);
 /// ```
 /// 
-pub fn write2md(musicfiles : &Vec<MusicFile>) {
+pub fn write2md(musicfiles : &[MusicFile]) {
 
-    let mut i = 0;
     let file = File::create("seriafile.md").unwrap();
     let mut md = Markdown::new(file);
-    for music in musicfiles {
+    for (i, music) in musicfiles.iter().enumerate() {
         
         md.write(format!("N° : {}, path :  {}", i.to_string(), music.path()).heading(2)).unwrap();
         
@@ -32,6 +31,5 @@ pub fn write2md(musicfiles : &Vec<MusicFile>) {
 
         md.write(format!("{}{}", "Année : ", music.year()).paragraph()).unwrap();
 
-        i += 1;
     }
 }

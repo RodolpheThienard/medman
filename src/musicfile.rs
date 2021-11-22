@@ -34,10 +34,10 @@ impl MusicFile {
     }
 
     pub fn year(&self) -> String {
-        self.year.to_string().clone()
+        self.year.to_string()
     }
 
     pub fn path(&self) -> &str {
-        self.path.to_str().unwrap().clone()
+        self.path.to_str().unwrap()
     }
 }

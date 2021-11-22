@@ -8,7 +8,7 @@ use crate::write2playlist::write2pls;
 
 
 /// Fonction qui génère une sorti pour la recherche effectuée. 
-fn output(music_files: &Vec<MusicFile>) {
+fn output(music_files: &[MusicFile]) {
     let mut toogler = String::new();
     
     println!("Souhaitez vous l'enregistrer en json (sérialiser) ? (y / n)");
@@ -29,7 +29,7 @@ fn output(music_files: &Vec<MusicFile>) {
                 match toogler.as_str() {
                     "n\n" => {},
                     "y\n" => {
-                        write2md(&music_files);
+                        write2md(music_files);
                     },
                     _ => {},
                 }
@@ -40,7 +40,7 @@ fn output(music_files: &Vec<MusicFile>) {
                 match toogler.as_str() {
                     "n\n" => {},
                     "y\n" => {
-                        write2pls(&music_files);
+                        write2pls(music_files);
                     },
                     _ => {},
                 }
@@ -79,7 +79,7 @@ pub fn user_helper() {
                 println!("où souhaitez vous scanner les musiques ?");
                 stdin().read_line(&mut path).expect("Path non reconnu");
                 let path = std::path::Path::new(&path[0..path.len()-1]);
-                let music_files = scan(&path);
+                let music_files = scan(path);
 
                 output(&music_files);
 
@@ -105,7 +105,7 @@ pub fn user_helper() {
                             println!("quel operateur souhaitez vous ajouter ? ( not / or / and)");
                             arguments.clear();
                             let _ = stdin().read_line(&mut arguments);
-                            args_vec.push(format!("{}", arguments[0..category.len()-1].to_string()));
+                            args_vec.push(arguments[0..category.len()-1].to_string());
                             arguments.clear();
                             category.clear();
                             toogler2.clear();
@@ -116,7 +116,7 @@ pub fn user_helper() {
                                     println!("où souhaitez vous scanner les musiques ?");
                                     stdin().read_line(&mut path).expect("Path non reconnu");
                                     let path = std::path::Path::new(&path[0..path.len()-1]);
-                                    let music_files = scan(&path);
+                                    let music_files = scan(path);
                                     search(&music_files, &args_vec);
                                     output(&music_files);
                                     break 'search;
@@ -127,10 +127,10 @@ pub fn user_helper() {
                                     output(&deserialize);
                                     break 'search;
                                 },
-                                _ => {break;},
+                                _ => {break 'search;},
                             }
                         },
-                        _ => {break;},
+                        _ => {break 'interact;},
                     }
                     
                 }
@@ -147,7 +147,7 @@ pub fn user_helper() {
                     println!("quel est le nouveau tag ?");
                     stdin().read_line(&mut arguments).expect("Path non reconnu");
 
-                    scan_add_tag(&path, &category, &arguments);
+                    scan_add_tag(path, &category, &arguments);
                     break 'interact;
                 },
 
@@ -161,7 +161,7 @@ pub fn user_helper() {
                             println!("où souhaitez vous scanner les musiques ?");
                             stdin().read_line(&mut path).expect("Path non reconnu");
                             let path = std::path::Path::new(&path[0..path.len()-1]);
-                            let music_files = scan(&path);
+                            let music_files = scan(path);
                             let _ = scrap(&music_files);
                             output(&music_files);
                             break 'interact;
@@ -172,7 +172,7 @@ pub fn user_helper() {
                             output(&deserialize);
                             break 'interact;
                         },
-                        _ => {break;},
+                        _ => {break 'interact;},
                     }
                     
                 },
