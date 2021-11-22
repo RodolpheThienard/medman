@@ -108,9 +108,9 @@ fn depile(mut pile: Pile) -> Vec<i32> {
         if !pile.value.is_empty() {two = pile.value.pop().unwrap();}
         match operator {
             Some(Operator::Not) => {
-                for i in 0..one.len() {
-                    if one[i] == 0 {one[i] = 1}
-                    else { one[i] = 0}
+                for ref mut i in one.clone() {
+                    if *i == 0 {*i = 1}
+                    else { *i = 0}
                 };
             },
             Some(Operator::And) => {

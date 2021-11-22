@@ -36,6 +36,13 @@ pub struct CliArguments {
 
 } 
 
+impl Default for CliArguments {
+        fn default() -> Self {
+            Self::new()
+       }
+    }
+    
+
 impl CliArguments {
     pub fn new() -> CliArguments {
         CliArguments::from_args()

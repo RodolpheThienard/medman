@@ -32,7 +32,7 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
                 music_files.push(MusicFile::new(
                     values.path(),
                 match value.title() {Some(e) => e.to_string(), None => "None".to_string()},
-                    match value.year() { Some(e) => e, None => 0,},
+                    value.year().unwrap_or(0),
                     match value.artist() { Some(e) => e.to_string(), None => "None".to_string()},
                     match value.album_title() { Some(e) => e.to_string(), None => "None".to_string()},
                 ));
