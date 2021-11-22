@@ -3,6 +3,18 @@ use crate::musicfile::MusicFile;
 use std::fs::File;
 use std::io::Write;
 
+/// Write2pls est une fonction qui permet de transformer un Vec<MusicFile> en un fichier pls ( une playlist)
+/// 
+/// La fonction est très utile pour un utilisateur qui aurait besoin d'une playlist de ses musiques.
+/// 
+/// Le fichier de sorti portera le nom : playlist.pls
+/// # Examples : 
+/// ```
+/// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// 
+/// write2pls(&music_files);
+/// ```
+
 pub fn write2pls(music_files: &Vec<MusicFile>) {
 
     let mut buf = Vec::new();

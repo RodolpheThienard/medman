@@ -1,8 +1,8 @@
 use std::path::Path;
 use walkdir::{DirEntry, WalkDir};
 use audiotags::*;
-
 use crate::musicfile::MusicFile;
+
 
 const SUPPORTED_EXTENSIONS: [&str; 8] = ["mp3", "mp4", "Flac", "m4a", "m4p", "m4b", "m4r", "m4v"];
 
@@ -10,6 +10,16 @@ fn is_supported(entry: &DirEntry) -> bool {
     entry.path().is_file() &&
     SUPPORTED_EXTENSIONS.contains(&entry.path().extension().unwrap().to_str().unwrap())
 }
+
+/// supported extension : mp3, mp4, Flac, m4a, m4p, m4b, m4r, m4v
+/// 
+/// Scan effectue une recherche a partir d'un path qui peut etre un dossier ou un ficher.
+/// La fonction renvoie un vecteur de MusicFile.
+/// # Examples:
+/// ```
+/// let scaned_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// 
+/// ```
 
 pub fn scan(path: &Path) -> Vec<MusicFile> {
     let mut music_files: Vec<MusicFile> = Vec::new();
@@ -33,7 +43,17 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
     };
     music_files
 }
-
+/// supported extension : mp3, mp4, Flac, m4a, m4p, m4b, m4r, m4v 
+/// 
+/// scan_add_tag effectue une recherche a partir d'un path qui peut etre un dossier ou un ficher.
+/// La fonction prend en entrée le tag a modifier ainsi que l'argument a mettre puis modifie les metadatas du/des fichier/s.
+/// # Examples:
+/// ```
+/// let tag =  "year";
+/// let argument = "2000";
+/// scan_add_tag(std::path::Path::new("location"), &tag, &argument);
+/// 
+/// ```
 pub fn scan_add_tag(path: &Path, cat: &str, tag: &str) {
     let walker = WalkDir::new(path).into_iter();
     

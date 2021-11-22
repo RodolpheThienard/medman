@@ -19,6 +19,26 @@ impl Pile {
     }
 }
 
+/// search est une fonction qui permet de trier un Vec<MusicFile> avec des requetes de tag sous la forme :
+/// year=2000 and title=i\\love\\rock\\and\\roll
+/// 
+/// La requete peut contenir autant d'argument que désiré. Il y a 3 operateur : NOT / OR / AND
+/// 
+/// Si l'argument de la requete est un mot composé, il faut utiliser "\\" pour remplacer l'espace
+/// 
+/// La fonction renvoie un Vec<MusicFile> trié
+/// 
+/// # Examples: 
+/// ```
+/// let scaned_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// let request = Vec::new();
+/// request.push("year=2000".to_string());
+/// request.push("and".to_string());
+/// request.push("artist=acdc".to_string());
+/// 
+/// let music_files = search(&scaned_files, &request);
+/// ```
+
 pub fn search(music_files: &Vec<MusicFile>, request: &Vec<String>) -> Vec<MusicFile> {
     let mut searched: Vec<MusicFile> = Vec::new();
     let mut pile = Pile::new();

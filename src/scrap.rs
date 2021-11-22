@@ -4,7 +4,22 @@ use crate::musicfile::MusicFile;
 use urlencoding::encode;
 use audiotags::Tag;
 
-pub fn scrap(music_files: &Vec<MusicFile>) -> Result<(), Error> {
+/// scrap est une fonction qui permet à l'utilisateur de changer les tags de chaque morceau. 
+/// 
+/// Le fichier a modifier doit être sous la forme : Artist - titre
+/// 
+/// scrap prend en entrée un vecteur de musicfile et return un Result avec soit 1 soit une erreur
+/// 
+/// # Examples:
+/// ```
+/// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// 
+/// let result = scrap(&music_files);
+/// 
+/// assert_eq!(result, 1); 
+/// ```
+
+pub fn scrap(music_files: &Vec<MusicFile>) -> Result<i32, Error> {
 
     for music in music_files {
         let split = music.path().split('/').collect::<Vec<&str>>();
@@ -34,5 +49,5 @@ pub fn scrap(music_files: &Vec<MusicFile>) -> Result<(), Error> {
         value.set_album_title(&album.as_str().unwrap());
         value.write_to_path(&music.path()).unwrap();
     }
-    Ok(())
+    Ok(1)
 }

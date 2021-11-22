@@ -3,7 +3,18 @@ use std::{fs::File};
 
 use crate::musicfile::{MusicFile};
 
-
+/// Write2md est une fonction qui permet de transformer un Vec<MusicFile> en un fichier markdown
+/// 
+/// La fonction est très utile pour un utilisateur qui aurait besoin d'un rendu visuel des musiques.
+/// 
+/// Le fichier de sorti portera le nom : seriafile.md
+/// # Examples : 
+/// ```
+/// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
+/// 
+/// write2md(&music_files);
+/// ```
+/// 
 pub fn write2md(musicfiles : &Vec<MusicFile>) {
 
     let mut i = 0;
