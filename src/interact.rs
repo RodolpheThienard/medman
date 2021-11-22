@@ -6,10 +6,12 @@ use crate::musicfile::MusicFile;
 use crate::search::search;
 use crate::write2playlist::write2pls;
 
+
+/// Fonction qui génère une sorti pour la recherche effectuée. 
 fn output(music_files: &Vec<MusicFile>) {
     let mut toogler = String::new();
     
-    println!("Souhaitez vous l'enregistrer en json ? (y / n)");
+    println!("Souhaitez vous l'enregistrer en json (sérialiser) ? (y / n)");
                 let _ = stdin().read_line(&mut toogler);
                 match toogler.as_str() {
                     "n\n" => {},
@@ -54,17 +56,21 @@ pub fn user_helper() {
     let mut arguments = String::new();
 
 
-    println!("Print all commands avaible");
-
     println!("Scan : permet de scan un dossier pour y enregistrer 
-    toutes les musiques et par la suite, modifier les informations");
+    toutes les musiques et par la suite, modifier les informations \n");
 
     println!("search : permet de trier un scan ou un fichier sérialisé
     avec différents argument ( year / title / artist / album ) et differents
-    modificateur ( not / and / or)");
+    modificateur ( not / and / or)\n");
+
+    println!("scrap : permet d'ajouter / modifier une metadata ( tags ) qui sont
+    album / year / title / artist. Elle récupère les informations sur internet. 
+    le fichier doit avoir le pattern: artist - titre\n");
 
     println!("tag : permet d'ajouter / modifier une metadata ( tags ) qui sont
-    album / year / title / artist");
+    album / year / title / artist\n");
+
+    println!("Veuillez entre la commande pour continuer : ");
    
     'interact: loop {
         let _ = stdin().read_line(&mut buf);
