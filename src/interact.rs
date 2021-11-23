@@ -74,8 +74,8 @@ pub fn user_helper() {
    
     'interact: loop {
         let _ = stdin().read_line(&mut buf);
-        match buf.as_str() {
-            "scan\n" => {
+        match buf.as_str().trim() {
+            "scan" => {
                 println!("où souhaitez vous scanner les musiques ?");
                 stdin().read_line(&mut path).expect("Path non reconnu");
                 let path = std::path::Path::new(&path[0..path.len()-1]);
@@ -85,7 +85,7 @@ pub fn user_helper() {
 
                 break 'interact;},
 
-            "search\n" => {
+            "search" => {
                 
                 println!("souhaitez vous utiliser un fichier serialise ? y/n");
                 let _ = stdin().read_line(&mut toogler);
@@ -137,7 +137,7 @@ pub fn user_helper() {
                 break 'interact;},
 
 
-                "tag\n" => {
+                "tag" => {
                     println!("où souhaitez vous modifier les tags des musiques ?");
                     stdin().read_line(&mut path).expect("Path non reconnu");
                     let path = std::path::Path::new(&path[0..path.len()-1]);
@@ -152,7 +152,7 @@ pub fn user_helper() {
                 },
 
 
-                "scrap\n" => {
+                "scrap" => {
                     println!("souhaitez vous utiliser un fichier serialise ? y/n");
                     let _ = stdin().read_line(&mut toogler);
 
