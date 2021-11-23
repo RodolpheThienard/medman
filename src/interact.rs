@@ -1,4 +1,4 @@
-use std::io::*;
+use std::io::{stdin, Write};
 use crate::scan::{scan, scan_add_tag};
 use crate::scrap::scrap;
 use crate::write2md::write2md;

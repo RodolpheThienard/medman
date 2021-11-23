@@ -1,4 +1,4 @@
-use markdown_gen::markdown::*;
+use markdown_gen::markdown::{Markdown, AsMarkdown};
 use std::{fs::File};
 
 use crate::musicfile::{MusicFile};

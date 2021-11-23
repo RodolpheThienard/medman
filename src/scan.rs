@@ -1,6 +1,6 @@
 use std::path::Path;
 use walkdir::{DirEntry, WalkDir};
-use audiotags::*;
+use audiotags::Tag;
 use crate::musicfile::MusicFile;
 
 
