@@ -69,27 +69,27 @@ fn music_filter(music_files: &[MusicFile], req: &str) -> Vec<i32> {
     for (index, music) in music_files.iter().enumerate() {
         match value_category {
             "title" => {
-                if music.title() == value {
+                if music.title().contains(value) {
                     tmp[index] = 1;
                 }
             },
             "artist" => {
-                if music.artist() == value {
+                if music.artist().contains(value) {
                     tmp[index] = 1;
                 }
             },
             "year" => {
-                if music.year() == value {
+                if music.year().contains(value) {
                     tmp[index] = 1;
                 }
             },
             "album" => {
-                if music.album() == value {
+                if music.album().contains(value) {
                     tmp[index] = 1;
                 }
             },
             "path" => {
-                if music.path() == value {
+                if music.path().contains(value) {
                     tmp[index] = 1;
                 }
             },
