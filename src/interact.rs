@@ -147,7 +147,7 @@ pub fn user_helper() {
                     println!("quel est le nouveau tag ?");
                     stdin().read_line(&mut arguments).expect("Path non reconnu");
 
-                    scan_add_tag(&path, &category.trim(), &arguments.trim());
+                    scan_add_tag(path, category.trim(), arguments.trim());
                     let music_files = scan(path);
                     output(&music_files);
 
@@ -164,9 +164,9 @@ pub fn user_helper() {
                             println!("où souhaitez vous scanner les musiques ?");
                             stdin().read_line(&mut path).expect("Path non reconnu");
                             let path = std::path::Path::new(&path[0..path.len()-1]);
-                            let music_files = scan(&path);
+                            let music_files = scan(path);
                             let _ = scrap(&music_files);
-                            let output_vec: Vec<MusicFile> = scan(&path);
+                            let output_vec: Vec<MusicFile> = scan(path);
                             output(&output_vec);
                             break 'interact;
                         },
