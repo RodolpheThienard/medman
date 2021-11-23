@@ -48,7 +48,7 @@ fn main() {
             match args.deseria() {
                 false => {
                     match args.path().to_str() {
-                        None => println!("Veulliez indiquer le path ou un fichier sérialié des musiques à écrire dans le markdown"),
+                        None => panic!("Veulliez indiquer le path ou un fichier sérialié des musiques à écrire dans le markdown"),
                         Some(_) => {
                             let music_files = scan(args.path());
                             write2md(&music_files);

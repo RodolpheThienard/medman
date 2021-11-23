@@ -66,7 +66,6 @@ pub fn scan_add_tag(path: &Path, cat: &str, tag: &str) {
                         value.set_title(tag);
                     },
                     "year" => {
-                        println!("OUI");
                         value.set_year(std::str::FromStr::from_str(tag).unwrap());
                     },
                     "artist" => {
