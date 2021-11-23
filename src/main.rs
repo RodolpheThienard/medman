@@ -98,13 +98,21 @@ fn main() {
             match args.deseria() {
                 false => {
                     let music_files = scan(args.path());
-                    let _ = scrap(&music_files);
-                    check_md_pls(args, &music_files);
+                    let result = scrap(&music_files);
+                    let mut musics: Vec<MusicFile> = Vec::new();
+                    for res in result.unwrap() {
+                        musics.push(scan(std::path::Path::new(res)).pop().unwrap());
+                    }
+                    check_md_pls(args, &musics);
                 },
                 true => {
                     let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
-                    let _ = scrap(&deserialize);
-                    check_md_pls(args, &deserialize);
+                    let result = scrap(&deserialize);
+                    let mut musics: Vec<MusicFile> = Vec::new();
+                    for res in result.unwrap() {
+                        musics.push(scan(std::path::Path::new(res)).pop().unwrap());
+                    }
+                    check_md_pls(args, &musics);
                 },
             }
         },

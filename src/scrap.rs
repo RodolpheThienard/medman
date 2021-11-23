@@ -19,8 +19,9 @@ use audiotags::Tag;
 /// assert_eq!(result, 1); 
 /// ```
 
-pub fn scrap(music_files: &[MusicFile]) -> Result<i32, Error> {
+pub fn scrap(music_files: &[MusicFile]) -> Result<Vec<&str>, Error> {
 
+    let mut path_list: Vec<&str> = Vec::new();
     for music in music_files {
         let split = music.path().split('/').collect::<Vec<&str>>();
         let split_data = split[split.len()-1].split('-'); 
@@ -48,6 +49,7 @@ pub fn scrap(music_files: &[MusicFile]) -> Result<i32, Error> {
         value.set_artist(artist);
         value.set_album_title(album.as_str().unwrap());
         value.write_to_path(music.path()).unwrap();
+        path_list.push(music.path());
     }
-    Ok(1)
+    Ok(path_list)
 }

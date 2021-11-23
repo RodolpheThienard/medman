@@ -100,8 +100,8 @@ pub fn user_helper() {
                     args_vec.push(format!{"{}={}", category[0..category.len()-1].to_string(), arguments[0..arguments.len()-1].to_string()});
                     println!("Avez vous un autre argument ? y/n");
                     let _ = stdin().read_line(&mut toogler2);
-                    match toogler2.as_str() {
-                        "y\n" => {
+                    match toogler2.as_str().trim() {
+                        "y" => {
                             println!("quel operateur souhaitez vous ajouter ? ( not / or / and)");
                             arguments.clear();
                             let _ = stdin().read_line(&mut arguments);
@@ -110,9 +110,9 @@ pub fn user_helper() {
                             category.clear();
                             toogler2.clear();
                         },
-                        "n\n" => {
-                            match toogler.as_str() {
-                                "n\n" => {
+                        "n" => {
+                            match toogler.as_str().trim() {
+                                "n" => {
                                     println!("où souhaitez vous scanner les musiques ?");
                                     stdin().read_line(&mut path).expect("Path non reconnu");
                                     let path = std::path::Path::new(&path[0..path.len()-1]);
@@ -121,7 +121,7 @@ pub fn user_helper() {
                                     output(&music_files);
                                     break 'search;
                                 },
-                                "y\n" => {
+                                "y" => {
                                     let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
                                     search(&deserialize, &args_vec);
                                     output(&deserialize);
@@ -147,7 +147,10 @@ pub fn user_helper() {
                     println!("quel est le nouveau tag ?");
                     stdin().read_line(&mut arguments).expect("Path non reconnu");
 
-                    scan_add_tag(path, &category, &arguments);
+                    scan_add_tag(&path, &category.trim(), &arguments.trim());
+                    let music_files = scan(path);
+                    output(&music_files);
+
                     break 'interact;
                 },
 
@@ -156,20 +159,25 @@ pub fn user_helper() {
                     println!("souhaitez vous utiliser un fichier serialise ? y/n");
                     let _ = stdin().read_line(&mut toogler);
 
-                    match toogler.as_str() {
-                        "n\n" => {
+                    match toogler.as_str().trim() {
+                        "n" => {
                             println!("où souhaitez vous scanner les musiques ?");
                             stdin().read_line(&mut path).expect("Path non reconnu");
                             let path = std::path::Path::new(&path[0..path.len()-1]);
-                            let music_files = scan(path);
+                            let music_files = scan(&path);
                             let _ = scrap(&music_files);
-                            output(&music_files);
+                            let output_vec: Vec<MusicFile> = scan(&path);
+                            output(&output_vec);
                             break 'interact;
                         },
-                        "y\n" => {
-                            let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("seriafile.json").expect("msg")).expect("msg");
-                            let _ = scrap(&deserialize);
-                            output(&deserialize);
+                        "y" => {
+                            let deserialize: Vec<MusicFile> = serde_json::from_str(&std::fs::read_to_string("interaction.json").expect("msg")).expect("msg");
+                            let result = scrap(&deserialize);
+                            let mut musics: Vec<MusicFile> = Vec::new();
+                            for res in result.unwrap() {
+                                musics.push(scan(std::path::Path::new(res)).pop().unwrap());
+                            }
+                            output(&musics);
                             break 'interact;
                         },
                         _ => {break 'interact;},
