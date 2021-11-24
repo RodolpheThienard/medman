@@ -11,7 +11,7 @@ use audiotags::Tag;
 /// scrap prend en entrée un vecteur de musicfile et return un Result avec soit 1 soit une erreur
 /// 
 /// # Examples:
-/// ```
+/// ```ignore
 /// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
 /// 
 /// let result = scrap(&music_files);

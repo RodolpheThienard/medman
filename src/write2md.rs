@@ -9,7 +9,7 @@ use crate::musicfile::{MusicFile};
 /// 
 /// Le fichier de sorti portera le nom : seriafile.md
 /// # Examples : 
-/// ```
+/// ```ignore
 /// let music_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
 /// 
 /// write2md(&music_files);

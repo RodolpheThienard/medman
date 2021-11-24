@@ -16,7 +16,7 @@ fn is_supported(entry: &DirEntry) -> bool {
 /// Scan effectue une recherche a partir d'un path qui peut etre un dossier ou un ficher.
 /// La fonction renvoie un vecteur de MusicFile.
 /// # Examples:
-/// ```
+/// ```ignore
 /// let scaned_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
 /// 
 /// ```
@@ -48,7 +48,7 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
 /// scan_add_tag effectue une recherche a partir d'un path qui peut etre un dossier ou un ficher.
 /// La fonction prend en entrée le tag a modifier ainsi que l'argument a mettre puis modifie les metadatas du/des fichier/s.
 /// # Examples:
-/// ```
+/// ```ignore
 /// let tag =  "year";
 /// let argument = "2000";
 /// scan_add_tag(std::path::Path::new("location"), &tag, &argument);

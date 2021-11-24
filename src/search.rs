@@ -29,7 +29,7 @@ impl Pile {
 /// La fonction renvoie un Vec<MusicFile> trié
 /// 
 /// # Examples: 
-/// ```
+/// ```ignore
 /// let scaned_files: Vec<MusicFile> = scan(std::path::Path::new("location"));
 /// let request = Vec::new();
 /// request.push("year=2000".to_string());

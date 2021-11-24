@@ -9,7 +9,7 @@ use std::io::Write;
 /// 
 /// Le fichier de sorti portera le nom : playlist.pls
 /// # Examples : 
-/// ```
+/// ```ignore
 /// let music_files: VecMusicFile> = scan(std::path::Path::new("location"));
 /// 
 /// write2pls(&music_files);
