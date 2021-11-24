@@ -5,7 +5,6 @@ use structopt::StructOpt;
 #[derive(StructOpt)]
 pub struct CliArguments {
 
-    #[structopt(default_value="")]
     command: String,
 
     /// Chemin où trouver les fichiers à analyser
